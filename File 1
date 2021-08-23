@@ -61,6 +61,11 @@ Taskkill;
 
 taskkill /IM "chrome.exe" /F
 
+Naked woman om vimeo;
+
+$WScript = New-Object -com wscript.shell; 1..50 | % { $WScript.SendKeys([char]175) };
+Start-Process iexplore -ArgumentList "-k https://vimeo.com/groups/419721/videos/335160252?autoplay=1"
+
 Links:
 https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/Methodology%20and%20Resources/Reverse%20Shell%20Cheatsheet.md#powershell
 
